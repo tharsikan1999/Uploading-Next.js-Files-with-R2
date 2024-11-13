@@ -8,6 +8,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { IconProps } from "@radix-ui/react-icons/dist/types";
 import Button from "./Button";
+import Image from "next/image";
 
 export function Upload() {
   const [file, setFile] = useState<File | undefined>();
@@ -143,21 +144,23 @@ export function Upload() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center h-screen bg-gray-100 dark:bg-gray-900">
+    <main className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-gray-50 to-gray-200 dark:from-gray-800 dark:to-gray-900">
       <div className="w-full max-w-3xl p-6 md:p-8 lg:p-10">
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg transition-transform hover:scale-105 duration-300">
           <div className="p-6 md:p-8 lg:p-10">
-            <h1 className="text-2xl font-bold mb-4 dark:text-gray-200">
-              Upload Image
+            <h1 className="text-3xl font-extrabold mb-6 dark:text-gray-200 text-center">
+              Upload Your Image
             </h1>
             <form>
-              <div className="flex justify-center items-center h-64 bg-gray-200 dark:bg-gray-700 rounded-lg mb-6">
+              <div className="flex justify-center items-center h-64 bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-lg mb-6 border-2 border-dashed border-gray-300 dark:border-gray-600">
                 <label
-                  className="cursor-pointer flex flex-col items-center justify-center space-y-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+                  className="cursor-pointer flex flex-col items-center justify-center space-y-3 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
                   htmlFor="image-upload"
                 >
-                  <UploadIcon className="w-8 h-8" />
-                  <span>Drag and drop or click to upload</span>
+                  <UploadIcon className="w-10 h-10 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300" />
+                  <span className="font-medium">
+                    Drag and drop or click to upload
+                  </span>
                 </label>
                 <input
                   accept="image/*"
@@ -169,35 +172,49 @@ export function Upload() {
               </div>
 
               {preview && (
-                <div className="bg-white dark:bg-gray-800 shadow-md mt-4 mb-4">
-                  <img
+                <div className="bg-white dark:bg-gray-800 shadow-lg mt-6 mb-4 rounded-lg overflow-hidden transition-all">
+                  <Image
                     src={preview}
                     alt="Uploaded Image"
                     width={600}
                     height={400}
-                    className="w-full h-auto rounded-lg"
+                    className="w-full h-auto"
                   />
                 </div>
               )}
-              <p className="dark:text-gray-200">Upload with</p>
-              <p className="text-sm dark:text-gray-500">select one</p>
-              <div className="flex justify-between">
+
+              <div className="text-center mb-4">
+                <p className="text-lg dark:text-gray-200 font-semibold">
+                  Upload with
+                </p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                  Select one method
+                </p>
+              </div>
+
+              <div className="flex justify-between gap-4">
                 <Button
                   text="Workers API"
                   submitHandler={handleWorkerApiSubmit}
+                  className="bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg shadow-md transition-all duration-200"
                 />
                 <Button
                   text="Pre-signed URL"
                   submitHandler={handlePreSignedUrlSubmit}
+                  className="bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-medium px-4 py-2 rounded-lg shadow-md transition-all duration-200"
                 />
                 <Button
                   text="Temp Credentials"
                   submitHandler={handleTempCredsSubmit}
+                  className="bg-purple-500 hover:bg-purple-600 dark:bg-purple-600 dark:hover:bg-purple-700 text-white font-medium px-4 py-2 rounded-lg shadow-md transition-all duration-200"
                 />
               </div>
             </form>
-            <div className="mt-2">
-              <p className="text-gray-200 dark:text-gray-500">{message}</p>
+
+            <div className="mt-4">
+              <p className="text-gray-600 dark:text-gray-400 italic">
+                {message}
+              </p>
             </div>
           </div>
         </div>
