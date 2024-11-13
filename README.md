@@ -14,14 +14,6 @@ This app uses three different methods to upload and download images to an R2 buc
 
 ## Getting Started
 
-### Clone the repository
-
-Clone the repo on your local machine running the following command:
-
-```bash
-git clone https://github.com/harshil1712/nextjs-r2-demo.git
-```
-
 ### Install dependencies
 
 Run the following command to install the required dependencies:
